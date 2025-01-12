@@ -35,3 +35,8 @@ else if (this.currentPlayer.count >= 3) {
 
 I hope you enjoy the game , I like it
 
+You can try it here :
+<url>
+    https://shohdi.github.io/TicTacToeByChatgptO1
+</url>
+
