@@ -13,6 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/TicTacToeByChatgptO1/",
+           "deployUrl": "/TicTacToeByChatgptO1/",
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
