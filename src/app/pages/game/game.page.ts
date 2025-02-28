@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component , AfterViewInit, Renderer2, ElementRef} from '@angular/core';
+
 
 type CellValue = '' | 'X' | 'O';
 
@@ -33,7 +34,12 @@ export class Player {
   templateUrl: './game.page.html',
   styleUrls: ['./game.page.scss'],
 })
-export class GamePage {
+export class GamePage implements AfterViewInit {
+
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
+
+
+
   board: Cell[][] = [
     [new Cell(), new Cell(), new Cell()],
     [new Cell(), new Cell(), new Cell()],
@@ -274,4 +280,45 @@ export class GamePage {
     this.message = '';
     this.selectedCell = null;
   }
+
+
+
+
+  ngAfterViewInit() {
+    /*
+    <script type="text/javascript">
+            atOptions = {
+                'key' : 'ef54e1978d2dea7f81cbd22389f7956c',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/ef54e1978d2dea7f81cbd22389f7956c/invoke.js"></script>
+    */
+
+
+    // Create the first script element with inline code
+    const inlineScript = this.renderer.createElement('script');
+    inlineScript.type = 'text/javascript';
+    inlineScript.text = `
+      atOptions = {
+        'key' : 'ef54e1978d2dea7f81cbd22389f7956c',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    `;
+    this.renderer.appendChild(this.el.nativeElement.querySelector('.col-md-12'), inlineScript);
+
+    // Create the second script element with the src attribute
+    const externalScript = this.renderer.createElement('script');
+    externalScript.type = 'text/javascript';
+    externalScript.src = '//www.highperformanceformat.com/ef54e1978d2dea7f81cbd22389f7956c/invoke.js';
+    this.renderer.appendChild(this.el.nativeElement.querySelector('.col-md-12'), externalScript);
+  }
+
+
 }
